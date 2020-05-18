@@ -1,0 +1,535 @@
+IQuality Assurance***Work Division***Part 1: Yuebai GaoPart 2: Jarrod YoungPart 3: Kayla SellYuebai writes the scanner (scanner.ml) which transform the original C file into a token lists.Jarrod and Kayla write the translator.ml where:Jarrod writes functions [parse, new_global_var, match_tok, skip_meta_statements, semicolon, comma, program, program_tail, program_decl_tail, func_list, func, func_tail, func_decl, type_name, parameter_list, parameter_list_tail, data_decls, id_list, id_list_tail, global_id_list, global_id_list_tail, in_first_of_expression, expr_list, expr_list_tail, break_statement, continue_statement, expression, expression_tail, addop, term, term_tail, mulop, factor, factor_tail, break_statement, continue_statement]Kayla writes functions [block_statements, statements, statement, statement_tail, general_func_call, assignment, printf_func_call, printf_func_call_tail, scanf_func_call, if_statement, else_statement, condition_expression, condition_expression_tail, condition_op, condition, comparison_op, while_statement, return_statement, return_statement_tail]To compile and run the project, type: ocamlopt -c scanner.mlocamlopt -c translator.mlocamlopt scanner.cmx translator.cmx -o translator./translator filename.c***Result***Our code could successfully pass C file: ab.c, automaton.c, loop_while.c, mandel.c, MeaningOfLife.c, tax.c
+
+——Result for ab.c:
+
+int main(){
+int local[6];
+local[3] = 0 ;
+local[1] = local[3] ;local[4] = 1 ;
+local[0] = local[4] ;local[5] = local[0] + local[1] ;
+local[2] = local[5] ;printf( "19 s=%2d\n" , local[2] );}
+
+
+
+——Result for automaton.c:
+
+#include <stdio.h>
+#define read(x) scanf("%d",&x)
+#define write(x) printf("%d\n",x)
+void state_0(void);
+void state_1(void);
+void state_2(void);
+void state_3(void);
+int getnextdigit(void){
+int local[5];
+local[1] = 0 ;
+local[2] = 0 ;
+CONTINUEL1:
+if(local[1] == local[2]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:printf( "Give me a number (-1 to quit): " );read ( local[0]  );local[3] = - 1 ;
+local[4] = 1 ;
+if(local[3] <= local[0]) goto TRUEL2;
+ 
+ goto FALSEL2;
+ TRUEL2:goto FALSEL1;
+
+ goto OUTL2;
+ FALSEL2:
+ OUTL2:;
+printf( "I need a number that's either 0 or 1.\n" );
+goto CONTINUEL1;
+FALSEL1:;return local[0] ;}
+void state_0(void){
+int local[4];
+local[0] = getnextdigit() ;local[1] = - 1 ;
+if(local[1] == local[0]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:printf( "You gave me an even number of 0's.\n" );printf( "You gave me an even number of 1's.\n" );printf( "I therefore accept this input.\n" );return ;
+ goto OUTL1;
+ FALSEL1:
+ OUTL1:;
+local[2] = 0 ;
+if(local[2] == local[0]) goto TRUEL2;
+ 
+ goto FALSEL2;
+ TRUEL2:state_2 (  );
+ goto OUTL2;
+ FALSEL2:
+ OUTL2:;
+local[3] = 1 ;
+if(local[3] == local[0]) goto TRUEL3;
+ 
+ goto FALSEL3;
+ TRUEL3:state_1 (  );
+ goto OUTL3;
+ FALSEL3:
+ OUTL3:;
+}
+void state_1(void){
+int local[4];
+local[0] = getnextdigit() ;local[1] = - 1 ;
+if(local[1] == local[0]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:printf( "You gave me an even number of 0's.\n" );printf( "You gave me an odd number of 1's.\n" );printf( "I therefore reject this input.\n" );return ;
+ goto OUTL1;
+ FALSEL1:
+ OUTL1:;
+local[2] = 0 ;
+if(local[2] == local[0]) goto TRUEL2;
+ 
+ goto FALSEL2;
+ TRUEL2:state_3 (  );
+ goto OUTL2;
+ FALSEL2:
+ OUTL2:;
+local[3] = 1 ;
+if(local[3] == local[0]) goto TRUEL3;
+ 
+ goto FALSEL3;
+ TRUEL3:state_0 (  );
+ goto OUTL3;
+ FALSEL3:
+ OUTL3:;
+}
+void state_2(void){
+int local[4];
+local[0] = getnextdigit() ;local[1] = - 1 ;
+if(local[1] == local[0]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:printf( "You gave me an odd number of 0's.\n" );printf( "You gave me an even number of 1's.\n" );printf( "I therefore reject this input.\n" );return ;
+ goto OUTL1;
+ FALSEL1:
+ OUTL1:;
+local[2] = 0 ;
+if(local[2] == local[0]) goto TRUEL2;
+ 
+ goto FALSEL2;
+ TRUEL2:state_0 (  );
+ goto OUTL2;
+ FALSEL2:
+ OUTL2:;
+local[3] = 1 ;
+if(local[3] == local[0]) goto TRUEL3;
+ 
+ goto FALSEL3;
+ TRUEL3:state_3 (  );
+ goto OUTL3;
+ FALSEL3:
+ OUTL3:;
+}
+void state_3(void){
+int local[4];
+local[0] = getnextdigit() ;local[1] = - 1 ;
+if(local[1] == local[0]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:printf( "You gave me an odd number of 0's.\n" );printf( "You gave me an odd number of 1's.\n" );printf( "I therefore reject this input.\n" );return ;
+ goto OUTL1;
+ FALSEL1:
+ OUTL1:;
+local[2] = 0 ;
+if(local[2] == local[0]) goto TRUEL2;
+ 
+ goto FALSEL2;
+ TRUEL2:state_1 (  );
+ goto OUTL2;
+ FALSEL2:
+ OUTL2:;
+local[3] = 1 ;
+if(local[3] == local[0]) goto TRUEL3;
+ 
+ goto FALSEL3;
+ TRUEL3:state_2 (  );
+ goto OUTL3;
+ FALSEL3:
+ OUTL3:;
+}
+int main(){
+state_0 (  );}
+
+
+
+——Result for loop_while.c:
+
+#include <stdio.h>
+// This test should be okay, since while statements are defined.
+int main(){
+int local[6];
+local[1] = 0 ;
+local[0] = local[1] ;local[2] = 10 ;
+if(local[0] < local[2]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:local[4] = 1 ;
+local[3] = local[0] + local[4] ;
+local[0] = local[3] ;
+ goto OUTL1;
+ FALSEL1:
+ OUTL1:;
+local[5] = 0 ;
+return local[5] ;}
+
+
+
+——Result for mandel.c:
+
+#include <stdio.h>
+#define read(x) scanf("%d",&x)
+#define write(x) printf("%d\n",x)
+int square(int x){
+int local[7];
+local[0] = x;
+local[2] = local[0] * local[0] ;
+local[4] = 500 ;
+local[3] = local[2] + local[4] ;
+local[1] = local[3] ;
+local[6] = 1000 ;
+local[5] = local[1] / local[6] ;
+return local[5] ;}
+int complex_abs_squared(int real,int imag){
+int local[3];
+local[0] = real;
+local[1] = imag;
+local[2] = square(local[0] ) + square(local[1] ) ;
+return local[2] ;}
+int check_for_bail(int real,int imag){
+int local[8];
+local[0] = real;
+local[1] = imag;
+local[2] = 4000 ;
+local[3] = 4000 ;
+if(local[0] > local[2]) goto TRUEL1;
+ if(local[1] > local[3]) goto TRUEL1;
+
+ goto FALSEL1;
+ TRUEL1:local[4] = 0 ;
+return local[4] ;
+ goto OUTL1;
+ FALSEL1:
+ OUTL1:;
+local[5] = 1600 ;
+if(local[5] > complex_abs_squared(local[0] , local[1] )) goto TRUEL2;
+ 
+ goto FALSEL2;
+ TRUEL2:local[6] = 0 ;
+return local[6] ;
+ goto OUTL2;
+ FALSEL2:
+ OUTL2:;
+local[7] = 1 ;
+return local[7] ;}
+int absval(int x){
+int local[4];
+local[0] = x;
+local[1] = 0 ;
+if(local[0] < local[1]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:local[2] = - 1 ;
+local[3] = local[2] * local[0] ;
+return local[3] ;
+ goto OUTL1;
+ FALSEL1:
+ OUTL1:;
+return local[0] ;}
+int checkpixel(int x,int y){
+int local[30];
+local[0] = x;
+local[1] = y;
+local[7] = 0 ;
+local[2] = local[7] ;local[8] = 0 ;
+local[3] = local[8] ;local[9] = 0 ;
+local[5] = local[9] ;local[10] = 16000 ;
+local[6] = local[10] ;local[11] = 255 ;
+CONTINUEL1:
+if(local[5] < local[11]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:local[12] = square(local[2] ) - square(local[3] ) ;
+local[13] = local[12] + local[0] ;
+local[4] = local[13] ;local[16] = 2 ;
+local[18] = local[2] * local[3] ;
+local[17] = local[16] * local[18] ;
+local[20] = 500 ;
+local[19] = local[17] + local[20] ;
+local[15] = local[19] ;
+local[22] = 1000 ;
+local[21] = local[15] / local[22] ;
+local[14] = local[21] ;
+local[23] = local[14] + local[1] ;
+local[3] = local[23] ;local[2] = local[4] ;local[24] = absval(local[2] ) + absval(local[3] ) ;
+local[25] = 5000 ;
+if(local[24] > local[25]) goto TRUEL2;
+ 
+ goto FALSEL2;
+ TRUEL2:local[26] = 0 ;
+return local[26] ;
+ goto OUTL2;
+ FALSEL2:
+ OUTL2:;
+local[28] = 1 ;
+local[27] = local[5] + local[28] ;
+local[5] = local[27] ;
+goto CONTINUEL1;
+FALSEL1:;local[29] = 1 ;
+return local[29] ;}
+int main(){
+int local[13];
+local[3] = 950 ;
+local[1] = local[3] ;local[4] = - 950 ;
+CONTINUEL1:
+if(local[1] > local[4]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:local[5] = - 2100 ;
+local[0] = local[5] ;local[6] = 1000 ;
+CONTINUEL2:
+if(local[0] < local[6]) goto TRUEL2;
+ 
+ goto FALSEL2;
+ TRUEL2:local[2] = checkpixel(local[0] , local[1] ) ;local[7] = 1 ;
+if(local[7] == local[2]) goto TRUEL3;
+ 
+ goto FALSEL3;
+ TRUEL3:printf( "X" );
+ goto OUTL3;
+ FALSEL3:
+ OUTL3:;
+local[8] = 0 ;
+if(local[8] == local[2]) goto TRUEL4;
+ 
+ goto FALSEL4;
+ TRUEL4:printf( " " );
+ goto OUTL4;
+ FALSEL4:
+ OUTL4:;
+local[10] = 40 ;
+local[9] = local[0] + local[10] ;
+local[0] = local[9] ;
+goto CONTINUEL2;
+FALSEL2:;printf( "\n" );local[12] = 50 ;
+local[11] = local[1] - local[12] ;
+local[1] = local[11] ;
+goto CONTINUEL1;
+FALSEL1:;}
+
+
+
+——Result for MeaningOfLife.c:
+
+#include <stdio.h>
+#define read(x) scanf("%d",&x)
+#define write(x) printf("%d\n",x)
+int global [1];
+
+int Calculate(int cnt){
+int local[7];
+local[0] = cnt;
+local[1] = 0 ;
+if(local[0] > local[1]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:local[3] = 1 ;
+local[2] = local[0] - local[3] ;
+local[5] = 42 ;
+local[4] = Calculate(local[2] ) + local[5] ;
+return local[4] ;
+ goto OUTL1;
+ FALSEL1:
+ OUTL1:;
+local[6] = 0 ;
+return local[6] ;}
+int main(void){
+int local[1];
+printf( "Magic positive number is " );read ( global[0]  );printf( "The meaning of Life is " );local[0] = Calculate(global[0] ) / global[0] ;
+write ( local[0]  );}
+
+
+
+——Result for tax.c:
+
+#include <stdio.h>
+#define read(x) scanf("%d",&x)
+#define write(x) printf("%d\n",x)
+int getinput(void){
+int local[4];
+local[1] = - 1 ;
+local[0] = local[1] ;local[2] = 0 ;
+CONTINUEL1:
+if(local[2] > local[0]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:read ( local[0]  );local[3] = 0 ;
+if(local[3] > local[0]) goto TRUEL2;
+ 
+ goto FALSEL2;
+ TRUEL2:printf( "I need a non-negative number: " );
+ goto OUTL2;
+ FALSEL2:
+ OUTL2:;
+
+goto CONTINUEL1;
+FALSEL1:;return local[0] ;}
+int main(){
+int local[72];
+printf( "Welcome to the United States 1040 federal income tax program.\n" );printf( "(Note: this isn't the real 1040 form. If you try to submit your\n" );printf( "taxes this way, you'll get what you deserve!\n\n" );printf( "Answer the following questions to determine what you owe.\n\n" );printf( "Total wages, salary, and tips? " );local[0] = getinput() ;printf( "Taxable interest (such as from bank accounts)? " );local[1] = getinput() ;printf( "Unemployment compensation, qualified state tuition, and Alaska\n" );printf( "Permanent Fund dividends? " );local[2] = getinput() ;local[25] = local[0] + local[1] ;
+local[26] = local[25] + local[2] ;
+local[3] = local[26] ;printf( "Your adjusted gross income is: " );write ( local[3]  );printf( "Enter <1> if your parents or someone else can claim you on their" );printf( " return. \nEnter <0> otherwise: " );local[14] = getinput() ;local[27] = 0 ;
+if(local[27] != local[14]) goto TRUEL1;
+ 
+ goto FALSEL1;
+ TRUEL1:local[29] = 250 ;
+local[28] = local[0] + local[29] ;
+local[16] = local[28] ;local[30] = 700 ;
+local[17] = local[30] ;local[18] = local[17] ;if(local[18] < local[16]) goto TRUEL2;
+ 
+ goto FALSEL2;
+ TRUEL2:local[18] = local[16] ;
+ goto OUTL2;
+ FALSEL2:
+ OUTL2:;
+printf( "Enter <1> if you are single, <0> if you are married: " );local[15] = getinput() ;local[31] = 0 ;
+if(local[31] != local[15]) goto TRUEL3;
+ 
+ goto FALSEL3;
+ TRUEL3:local[32] = 7350 ;
+local[19] = local[32] ;
+ goto OUTL3;
+ FALSEL3:local[33] = 7350 ;
+local[19] = local[33] ;
+ OUTL3:;
+local[20] = local[18] ;if(local[20] > local[19]) goto TRUEL4;
+ 
+ goto FALSEL4;
+ TRUEL4:local[20] = local[19] ;
+ goto OUTL4;
+ FALSEL4:
+ OUTL4:;
+local[34] = 0 ;
+local[21] = local[34] ;local[35] = 0 ;
+if(local[15] == local[35]) goto TRUEL5;
+ 
+ goto FALSEL5;
+ TRUEL5:printf( "Enter <1> if your spouse can be claimed as a dependant, " );printf( "enter <0> if not: " );local[24] = getinput() ;local[36] = 0 ;
+if(local[36] == local[24]) goto TRUEL6;
+ 
+ goto FALSEL6;
+ TRUEL6:local[37] = 2800 ;
+local[21] = local[37] ;
+ goto OUTL6;
+ FALSEL6:
+ OUTL6:;
+
+ goto OUTL5;
+ FALSEL5:
+ OUTL5:;
+local[38] = local[20] + local[21] ;
+local[22] = local[38] ;local[4] = local[22] ;
+ goto OUTL1;
+ FALSEL1:
+ OUTL1:;
+local[39] = 0 ;
+if(local[39] == local[14]) goto TRUEL7;
+ 
+ goto FALSEL7;
+ TRUEL7:printf( "Enter <1> if you are single, <0> if you are married: " );local[15] = getinput() ;local[40] = 0 ;
+if(local[40] != local[15]) goto TRUEL8;
+ 
+ goto FALSEL8;
+ TRUEL8:local[41] = 12950 ;
+local[4] = local[41] ;
+ goto OUTL8;
+ FALSEL8:
+ OUTL8:;
+local[42] = 0 ;
+if(local[42] == local[15]) goto TRUEL9;
+ 
+ goto FALSEL9;
+ TRUEL9:local[43] = 7200 ;
+local[4] = local[43] ;
+ goto OUTL9;
+ FALSEL9:
+ OUTL9:;
+
+ goto OUTL7;
+ FALSEL7:
+ OUTL7:;
+local[44] = local[3] - local[4] ;
+local[5] = local[44] ;local[45] = 0 ;
+if(local[5] < local[45]) goto TRUEL10;
+ 
+ goto FALSEL10;
+ TRUEL10:local[46] = 0 ;
+local[5] = local[46] ;
+ goto OUTL10;
+ FALSEL10:
+ OUTL10:;
+printf( "Your taxable income is: " );write ( local[5]  );printf( "Enter the amount of Federal income tax withheld: " );local[6] = getinput() ;printf( "Enter <1> if you get an earned income credit (EIC); " );printf( "enter 0 otherwise: " );local[23] = getinput() ;local[47] = 0 ;
+local[7] = local[47] ;local[48] = 0 ;
+if(local[48] != local[23]) goto TRUEL11;
+ 
+ goto FALSEL11;
+ TRUEL11:printf( "OK, I'll give you a thousand dollars for your credit.\n" );local[49] = 1000 ;
+local[7] = local[49] ;
+ goto OUTL11;
+ FALSEL11:
+ OUTL11:;
+local[50] = local[7] + local[6] ;
+local[8] = local[50] ;printf( "Your total tax payments amount to: " );write ( local[8]  );local[53] = 28 ;
+local[52] = local[5] * local[53] ;
+local[55] = 50 ;
+local[54] = local[52] + local[55] ;
+local[51] = local[54] ;
+local[57] = 100 ;
+local[56] = local[51] / local[57] ;
+local[9] = local[56] ;printf( "Your total tax liability is: " );write ( local[9]  );local[58] = local[8] - local[9] ;
+local[10] = local[58] ;local[59] = 0 ;
+if(local[10] < local[59]) goto TRUEL12;
+ 
+ goto FALSEL12;
+ TRUEL12:local[60] = 0 ;
+local[12] = local[60] ;
+ goto OUTL12;
+ FALSEL12:local[61] = 0 ;
+local[12] = local[61] ;
+ OUTL12:;
+local[62] = 0 ;
+if(local[10] > local[62]) goto TRUEL13;
+ 
+ goto FALSEL13;
+ TRUEL13:printf( "Congratulations, you get a tax refund of $" );write ( local[10]  );
+ goto OUTL13;
+ FALSEL13:
+ OUTL13:;
+local[63] = local[9] - local[8] ;
+local[11] = local[63] ;local[64] = 0 ;
+if(local[11] >= local[64]) goto TRUEL14;
+ 
+ goto FALSEL14;
+ TRUEL14:printf( "Bummer. You owe the IRS a check for $" );write ( local[11]  );
+ goto OUTL14;
+ FALSEL14:
+ OUTL14:;
+local[65] = 0 ;
+if(local[11] < local[65]) goto TRUEL15;
+ 
+ goto FALSEL15;
+ TRUEL15:local[66] = 0 ;
+local[13] = local[66] ;
+ goto OUTL15;
+ FALSEL15:local[67] = 0 ;
+local[13] = local[67] ;
+ OUTL15:;
+write ( local[5]  );write ( local[8]  );write ( local[9]  );write ( local[17]  );write ( local[20]  );write ( local[19]  );write ( local[12]  );write ( local[13]  );local[5] = local[9] ;local[68] = 0 ;
+local[7] = local[68] ;local[69] = 0 ;
+local[9] = local[69] ;local[70] = local[17] + local[13] ;
+local[12] = local[70] ;local[71] = local[20] + local[19] ;
+local[13] = local[71] ;printf( "Thank you for using ez-tax.\n" );}
+
+
+
